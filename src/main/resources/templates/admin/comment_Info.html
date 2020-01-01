@@ -1,0 +1,52 @@
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/font-awesome.min.css">
+    <link rel="apple-touch-icon-precomposed" href="/static/admin/images/icon/icon.png">
+    <link rel="shortcut icon" href="/static/admin/images/icon/favicon.ico">
+</head>
+<body>
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-lg-10 col-md-offset-2 main" id="main" style="padding-top:0px;margin-top: -10px">
+    <div class="row">
+            <div class="col-md-8">
+                <div class="add-article-box">
+                    <h2 class="add-article-box-title"><span>博文标题</span></h2>
+                    <div class="add-article-box-content" style="padding-top:10px">
+                        <input type="text" name="timelineTitle" class="form-control" required th:value="${commentArticle !=null }?${commentArticle}:''" />
+                    </div>
+                </div>
+                <div class="add-article-box">
+                    <h2 class="add-article-box-title"><span>博文Id</span></h2>
+                    <div class="add-article-box-content" style="padding-top:10px">
+                        <input type="text" name="timelineTitle" class="form-control" required th:value="${lookComm !=null }?${lookComm.articleId}:''" />
+                    </div>
+                </div>
+                <div class="add-article-box">
+                    <h2 class="add-article-box-title"><span>用户名称</span></h2>
+                    <div class="add-article-box-content" style="padding-top:10px">
+                        <input type="text" name="timelineTitle" class="form-control" required th:value="${lookComm !=null }?${lookComm.commentName}:''" />
+                    </div>
+                </div>
+                <div class="add-article-box">
+                    <h2 class="add-article-box-title"><span>用户QQ</span></h2>
+                    <div class="add-article-box-content" style="padding-top:10px">
+                        <input type="text" name="timelineTitle" class="form-control" required th:value="${lookComm !=null }?${lookComm.commentQq}:''" />
+                    </div>
+                </div>
+                <div class="add-article-box">
+                    <h2 class="add-article-box-title"><span>评论内容</span></h2>
+                    <div class="add-article-box-content" style="padding-top:10px">
+                      <textarea type="text" class="form-control" name="timelineDesc" th:utext="${lookComm !=null }?${lookComm.commentContent}:''">
+
+                      </textarea>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+
+</body>
+</html>

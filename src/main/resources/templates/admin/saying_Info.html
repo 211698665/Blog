@@ -1,0 +1,71 @@
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/font-awesome.min.css">
+    <link rel="apple-touch-icon-precomposed" href="/static/admin/images/icon/icon.png">
+    <link rel="shortcut icon" href="/static/admin/images/icon/favicon.ico">
+</head>
+<body>
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-lg-10 col-md-offset-2 main" id="main">
+    <div class="row">
+        <form action="/admin/update_saying" method="post"   class="add-flink-form" autocomplete="off" draggable="false">
+            <div class="col-md-8">
+                <div class="add-article-box">
+                    <h2 class="add-article-box-title"><span>作者</span></h2>
+                    <div class="add-article-box-content" style="padding-top:10px">
+                      <input type="text" name="sayingAuthor" class="form-control" required th:value="${updateSaying !=null }?${updateSaying.sayingAuthor}:''" />
+                    </div>
+                </div>
+                <div class="add-article-box">
+                    <h2 class="add-article-box-title"><span>内容</span></h2>
+                    <input type="text" readonly ="readonly" th:value="${updateSaying !=null }?${updateSaying.sayingId}:''" name="sayingId" style="height: 1px;width: 0px" >
+                    <div class="add-article-box-content" style="padding-top:0px">
+                      <textarea type="text" class="form-control" name="sayingContent" th:utext="${updateSaying !=null }?${updateSaying.sayingContent}:''">
+
+                      </textarea>
+                    </div>
+                </div>
+                <div class="add-article-box">
+                    <h2 class="add-article-box-title"><span>状态</span></h2>
+                    <div class="add-article-box-content">
+                        <ul class="category-list">
+                            <li th:switch = "${updateSaying!= null and updateSaying.sayingStatus == 1 }">
+                                <label th:case="true">
+                                    <input name="sayingStatus" type="radio" value="1" checked="checked">
+                                    正常 <em class="hidden-md">( 状态ID: <span>1</span> )</em>
+                                </label>
+                                <label th:case="false">
+                                    <input name="sayingStatus" type="radio" value="1">
+                                    正常 <em class="hidden-md">( 状态ID: <span>1</span> )</em>
+                                </label>
+                            </li>
+                            <li th:switch = "${updateSaying!= null and updateSaying.sayingStatus == 2 }">
+                                <label th:case="true">
+                                    <input name="sayingStatus" type="radio" value="2" checked="checked">
+                                    异常<em class="hidden-md">( 状态ID: <span>2</span> )</em>
+                                </label>
+                                <label th:case="false">
+                                    <input name="sayingStatus" type="radio" value="2">
+                                    异常<em class="hidden-md">( 状态ID: <span>2</span> )</em>
+                                </label>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div style="text-align: center;color: red;height: 30px;line-height: 30px;margin-top: -16px"  th:text="${result!=null}?${result}:''">
+                </div>
+                <div class="add-article-box" style="text-align: center;">
+                    <button class="btn btn-primary btn-lg btn-block" type="submit" name="submit" >发&nbsp;布</button>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+</body>
+</html>

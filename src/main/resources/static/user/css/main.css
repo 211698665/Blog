@@ -1,0 +1,101 @@
+	#skPlayer .skPlayer-control{
+		float: left;
+		padding: 10px 15px 15px 5px;
+	}
+	#skPlayer .skPlayer-control > .skPlayer-percent .skPlayer-line{
+		background-color:#3095C1 ;
+	}
+	#skPlayer .skPlayer-control .skPlayer-volume .skPlayer-line{
+		background-color:#3095C1 ;
+	}
+	#skPlayer .skPlayer-play-btn{
+		width: 50px;
+		height: 50px;
+		background-color:#CC403C ;
+	}
+	#skPlayer .skPlayer-play-btn span.skPlayer-left {
+	    border-left: 17px solid #FFF;
+		border-top: 10px solid transparent;
+	    border-bottom: 10px solid transparent;
+	    left: 21px;
+	    top: 16px;
+	}
+	#skPlayer .skPlayer-play-btn.skPlayer-pause .skPlayer-left{
+		border: 8px solid #FFF;
+		border-left: 2px solid #FFF;
+		border-right: 2px solid #FFF;
+	}
+	#skPlayer .skPlayer-play-btn span.skPlayer-left {
+	    border-left: 17px solid #FFF;
+	    border-top: 10px solid transparent;
+	    border-bottom: 10px solid transparent;
+	    left: 20px;
+	    top: 16px;
+	}
+	#skPlayer .skPlayer-play-btn span.skPlayer-right{
+		border: 8px solid #FFF;
+	    border-right-color: rgb(255, 255, 255);
+	    border-right-style: solid;
+	    border-right-width: 14px;
+	    border-left-color: rgb(255, 255, 255);
+	    border-left-style: solid;
+	    border-left-width: 14px;
+		border-left: 2px solid #FFF;
+		border-right: 2px solid #FFF;
+		right: 19px;
+	}
+	#skPlayer .skPlayer-cover {
+	    width: 96%;
+	    height: 96%;
+	    transition: 0.37s;
+	    -webkit-transition: 0.37s;
+	    -moz-transition: 0.37s;
+	}
+	#skPlayer .skPlayer-cover.skPlayer-pause {
+	    filter: blur(1px);
+	    -webkit-filter: blur(1px);
+	    height: 96%;
+	}
+	#skPlayer .skPlayer-control p.skPlayer-name {
+	    font-size: 19px;
+	    font-weight: 700;
+	    color: #6A6B6F;
+	    font-family: "楷体";
+	}
+	#skPlayer .skPlayer-control p.skPlayer-author {
+	    font-size: 14px;
+	    color: #666;
+	    max-width: 90%;
+	    padding-top: 2px;
+	}
+	#skPlayer .skPlayer-control .skPlayer-mode {
+	    right: 20px;
+	    bottom: 49px;
+	}
+	#skPlayer .skPlayer-control .skPlayer-list-switch {
+	    right: 20px;
+	    bottom: 10px;
+	}
+	#skPlayer .skPlayer-control .skPlayer-volume .skPlayer-percent {
+	    width: 110px;
+	}
+	#skPlayer .skPlayer-list .skPlayer-list-author {
+    color: #666;
+    float: right;
+    max-width: 107px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin-right: 16px;
+}
+	#skPlayer .skPlayer-list li.skPlayer-curMusic {
+    background-color: 
+    #F6F6F6;
+}
+.desc{
+	margin-top: 8px;
+}
+body{
+	margin-top: 80px;
+	padding: 0;
+}

@@ -1,0 +1,14 @@
+.article-content img{
+	height: 250px;
+	width: 60%;
+}
+.banquan:hover {
+    background: #3399CC;
+	color:#FFF;
+}
+.banquan {
+	height: 30px;
+	line-height: 30px;
+    word-wrap: break-word;
+    padding: 0;
+}

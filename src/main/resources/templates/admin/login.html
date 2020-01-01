@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="utf-8">
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>博客管理系统</title>
+		<link rel="stylesheet" type="text/css" href="/static/admin/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="/static/admin/css/style.css">
+		<link rel="stylesheet" type="text/css" href="/static/admin/css/login.css">
+		<link rel="apple-touch-icon-precomposed" href="/static/admin/images/icon/icon.png">
+		<link rel="shortcut icon" href="/static/admin/images/icon/favicon.ico">
+		<script src="/static/admin/js/jquery-2.1.4.min.js"></script>
+		<script type="text/javascript" src="/static/admin/js/img_ver.js"></script>
+		<style>
+			.bxs-row {
+				margin-bottom: 12px;
+			}
+			.logo-box {
+				width: 404px;
+				margin: 120px auto;
+				border: 1px solid #e5e5e5;
+				border-radius: 4px;
+				box-shadow: 0 4px 18px rgba(0, 0, 0, 0.2);
+				position: relative;
+				overflow: hidden;
+				height: 360px;
+			}
+			.login {
+				position: absolute;
+				width: 400px;
+				left: 0;
+				top: 0;
+				padding: 42px 42px 36px;
+				transition: all 0.8s;
+			}
+			.username,
+			.password,
+			.btn {
+				height: 44px;
+				width: 100%;
+				padding: 0 10px;
+				border: 1px solid #9da3a6;
+				background: #fff;
+				text-overflow: ellipsis;
+				-webkit-box-sizing: border-box;
+				-moz-box-sizing: border-box;
+				box-sizing: border-box;
+				-webkit-border-radius: 4px;
+				-moz-border-radius: 4px;
+				-khtml-border-radius: 4px;
+				border-radius: 4px;
+				-webkit-box-shadow: none;
+				-moz-box-shadow: none;
+				box-shadow: none;
+				color: #000;
+				font-size: 1em;
+				font-family: Helvetica, Arial, sans-serif;
+				font-weight: 400;
+				direction: ltr;
+				font-size: 13px;
+			}
+			.submit {
+				background-color: #0070ba;
+				color: #fff;
+				border: 1px solid #0070ba;
+			}
+			.submit:hover {
+				background-color: #005ea6;
+			}
+			.verBox {
+				position: absolute;
+				width: 100%;
+				text-align: center;
+				left: 404px;
+				top: 0;
+				opacity: 0;
+				transition: all 0.8s;
+				padding-top: 55px;
+			}
+			
+			.err {
+				margin: 12px 0 0;
+				line-height: 12px;
+				height: 12px;
+				font-size: 12px;
+				color: red;
+			}
+			.submit:hover {
+				background-color: #66329a;
+			}
+			
+			.btn.focus,
+			.btn:focus,
+			.btn:hover {
+				color: white;
+				text-decoration: none;
+			}
+		</style>
+	</head>
+	<body class="user-select">
+		<div class="logo-box">
+			<div class="login" style="">
+				<form method="post" action="/login/check" onsubmit="return fs()">
+					<div class="bxs-row" style="text-align:center;height: 76px;">
+						<img id="logo" src="/static/admin/images/logo.jpg" style="width:72px;"><span class="tips" style="color:lightseagreen;"> 博客系统</span>
+					</div>
+					<div class="bxs-row">
+						<input type="text" class="username" placeholder="邮箱" value="" name="userMail">
+						<p class=" err err-username"></p>
+					</div>
+					<div class="bxs-row">
+						<input type="password" class="password" name="userPassword" placeholder="密码">
+						<p class="err err-password"></p>
+					</div>
+					<div class="bxs-row">
+						<input type="submit" class="submit btn" value="登录" >
+					</div>
+				</form>
+			</div>
+			<div class="verBox">
+				<div id="imgVer" style="display:inline-block;"></div>
+			</div>
+		</div>
+		<script>
+			imgVer({
+				el: '$("#imgVer")',
+				width: '260',
+				height: '116',
+				img: [
+					'/static/admin/images/ver.png',
+					'/static/admin/images/ver-1.png',
+					'/static/admin/images/ver-2.png',
+					'/static/admin/images/ver-3.png'
+				],
+				success: function() {
+					$(".login").css({
+						"left": "0",
+						"opacity": "1"
+					});
+					$(".verBox").css({
+						"left": "404px",
+						"opacity": "0"
+					});
+					$(".tips").html(' 不知道账号密码？');
+					$("#logo").attr("src", '/static/admin/images/login-err.png')
+				},
+				error: function() {
+					$(".tips").html(' 不知道账号密码？');
+					$("#logo").attr("src", '/static/admin/images/login-err.png')
+				}
+			});
+			function fs() {
+				if($(".username").val() == '') {
+					$(".tips").html(' 老兄！你账号呢？');
+					$("#logo").attr("src", '/static/admin/images/null-password.jpg')
+					return  false;
+				} else if($(".password").val() == '') {
+					$(".tips").html(' 老兄！你密码呢？');
+					$("#logo").attr("src", '/static/admin/images/null-password.jpg')
+					return false;
+				} else {
+					$(".login").css({
+						"left": "-404px",
+						"opacity": "0"
+					});
+					$(".verBox").css({
+						"left": "0",
+						"opacity": "1"
+					})
+
+				}
+			}
+		</script>
+	</body>
+</html>

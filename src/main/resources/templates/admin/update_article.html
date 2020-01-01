@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="zh-CN" xmlns:th="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta charset="utf-8">
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>写公告 - 博客管理系统</title>
+		<link rel="stylesheet" type="text/css" href="/static/admin/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="/static/admin/css/style.css">
+		<link rel="stylesheet" href="/static/admin/lib/summernote/summernote.css" />
+		<link rel="stylesheet" type="text/css" href="/static/admin/css/font-awesome.min.css">
+		<link rel="apple-touch-icon-precomposed" href="/static/admin/images/icon/icon.png">
+		<link rel="shortcut icon" href="/static/admin/images/icon/favicon.ico">
+		<script src="/static/admin/js/jquery-2.1.4.min.js"></script>
+		<!--summernote富文本编辑器-->
+		<script src="/static/admin/lib/summernote/summernote.js"></script>
+		<script src="/static/admin/lib/summernote/lang/summernote-zh-CN.js"></script>
+		<script>
+			$(function() {
+				$('.summernote').summernote({
+					height: 200,
+					tabsize: 2,
+					lang: 'zh-CN'
+				});
+			});
+		</script>
+	</head>
+	<body class="user-select">
+		<section class="container-fluid">
+			<header>
+				<nav class="navbar navbar-default navbar-fixed-top">
+					<div class="container-fluid">
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"> <span class="sr-only">切换导航</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+							<a class="navbar-brand" href="/">SywCMS</a>
+						</div>
+						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+							<ul class="nav navbar-nav navbar-right">
+								<li class="dropdown">
+									<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">admin <span class="caret"></span></a>
+									<ul class="dropdown-menu dropdown-menu-left">
+										<li>
+											<a title="查看或修改个人信息" data-toggle="modal" data-target="#seeUserInfo">个人信息</a>
+										</li>
+										<li>
+											<a title="查看您的登录记录" data-toggle="modal" data-target="#seeUserLoginlog">登录记录</a>
+										</li>
+									</ul>
+								</li>
+								<li>
+									<a href="/admin/login" onClick="if(!confirm('是否确认退出？'))return false;">退出登录</a>
+								</li>
+								<li>
+									<a data-toggle="modal" data-target="#WeChat">帮助</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</nav>
+			</header>
+			<div class="row">
+				<aside class="col-sm-3 col-md-2 col-lg-2 sidebar">
+					<ul class="nav nav-sidebar">
+						<li>
+							<a href="/admin/index">首页</a>
+						</li>
+					</ul>
+					<ul class="nav nav-sidebar">
+						<li class="active">
+							<a href="/admin/article">文章</a>
+						</li>
+						<li>
+							<a href="/admin/sort">类别</a>
+						</li>
+						<li>
+							<a href="/admin/photo">相册</a>
+						</li>
+						<li>
+							<a href="/admin/notice">公告</a>
+						</li>
+						<li>
+							<a href="/admin/comment">评论</a>
+						</li>
+						<li>
+							<a href="music.html">音乐</a>
+						</li>
+
+					</ul>
+					<ul class="nav nav-sidebar">
+						<li>
+							<a href="/admin/saying">座右铭</a>
+						</li>
+						<li>
+							<a href="/admin/timeline">程序历程</a>
+						</li>
+					</ul>
+					<ul class="nav nav-sidebar">
+						<li>
+							<a class="dropdown-toggle" id="userMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">我的</a>
+							<ul class="dropdown-menu" aria-labelledby="userMenu">
+								<li>
+									<a href="/admin/ability">实战技能</a>
+								</li>
+								<li>
+									<a href="/admin/detail">个人资料</a>
+								</li>
+								<li>
+									<a href="/admin/flink">友情链接</a>
+								</li>
+							</ul>
+						</li>
+
+					</ul>
+				</aside>
+				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-lg-10 col-md-offset-2 main" id="main">
+					<div class="row">
+						<form action="/article/update" method="post" class="add-article-form" enctype="multipart/form-data">
+							<div class="col-md-9">
+								<h1 class="page-header" style="text-align: center;">文章修改</h1>
+								<label for="article-title">标题</label>
+								<input type="text" readonly ="readonly" th:value="${updateArticle !=null }?${updateArticle.articleId}:''" name="articleId" style="height: 1px ;width: 0px" />
+								<div class="form-group">
+									<input type="text" id="article-title"  th:value="${updateArticle !=null }?${updateArticle.articleTitle}:''" name="articleTitle" class="form-control" placeholder="在此处输入标题" required autofocus autocomplete="off">
+								</div>
+								<label for="article-title">内容</label>
+								<div class="m">
+									<textarea class="summernote form-control" name="articleContent" th:utext="${updateArticle !=null }?${updateArticle.articleContent}:''"></textarea>
+								</div>
+								<div class="add-article-box">
+									<h2 class="add-article-box-title"><span>图片</span></h2>
+									<div class="add-article-box-content" style="height: 100px;">
+										<div class="input-group" style="height: 40px;float: left; width: 80%;margin-top: 20px;">
+											<input type="file" id="url1" name="photoFile" style="display:none; " th:value="${updateArticle !=null }?${updateArticle.articleImage}:''" />
+											<input type="text" id="url2" name="articleImage" style="height: 40px;" class="form-control" th:value="${updateArticle !=null }?${updateArticle.articleImage}:''">
+											<span class="input-group-btn">
+												<button class="btn btn-default" style="height: 40px;"  onclick="getfils()" type="button">+浏览上传</button>
+											</span>
+										</div>
+										<!-- /input-group -->
+										<div style="width: 16%;float: right; height: 80px;">
+											<img th:src="@{${updateArticle.articleImage}}" id="img" style="height: 80px; width: 100%;" />
+										</div>
+									</div>
+								</div>
+								<div class="add-article-box">
+									<h2 class="add-article-box-title"><span>摘要</span></h2>
+									<div class="add-article-box-content">
+										<textarea class="form-control" name="articleSummary" th:utext="${updateArticle !=null }?${updateArticle.articleSummary}:''"  autocomplete="off"></textarea>
+										<span class="prompt-text">简短的概括一下博文的主要内容</span>
+									</div>
+								</div>
+								<div class="add-article-box">
+									<h2 class="add-article-box-title"><span>分类</span></h2>
+									<div class="add-article-box-content">
+										<select id="category-fname" class="form-control" name="articleLike">
+											<option  th:value="${categoryChosed.categoryId }" th:text="${categoryChosed.categoryName }"> </option>
+											<option  th:each="allcategory:${allcategorys}" th:value="${allcategory.categoryId}" th:text="${allcategory.categoryName }">
+
+											</option>
+										</select>
+
+									</div>
+								</div>
+								<div class="add-article-box">
+									<h2 class="add-article-box-title"><span>关键字</span></h2>
+									<div class="add-article-box-content">
+										<input type="text" class="form-control" placeholder="请输入关键字"  th:value="${updateArticle !=null }?${updateArticle.articleKeyword}:''" name="articleKeyword" autocomplete="off">
+										<span class="prompt-text">多个关键字请用英文逗号,隔开。</span>
+									</div>
+								</div>
+								<div class="add-article-box">
+									<h2 class="add-article-box-title"><span>状态</span></h2>
+									<div class="add-article-box-content">
+										<ul class="category-list">
+											<li th:switch = "${updateArticle!= null and updateArticle.articleStatus == 1 }">
+												<label th:case="true">
+													<input name="articleStatus" type="radio" value="1" checked="checked">
+													正常 <em class="hidden-md">( 状态ID: <span>1</span> )</em>
+												</label>
+												<label th:case="false">
+													<input name="articleStatus" type="radio" value="1">
+													正常 <em class="hidden-md">( 状态ID: <span>1</span> )</em>
+												</label>
+											</li>
+											<li th:switch = "${updateArticle!= null and updateArticle.articleStatus == 2 }">
+												<label th:case="true">
+													<input name="articleStatus" type="radio" value="2" checked="checked">
+													异常<em class="hidden-md">( 状态ID: <span>2</span> )</em>
+												</label>
+												<label th:case="false">
+													<input name="articleStatus" type="radio" value="2">
+													异常<em class="hidden-md">( 状态ID: <span>2</span> )</em>
+												</label>
+											</li>
+										</ul>
+									</div>
+								</div>
+								<div class="add-article-box" style="text-align: center;">
+									<button class="btn btn-primary btn-lg btn-block" type="submit" name="submit">发&nbsp;布</button>
+								</div>
+							</div>
+						</form>
+						<div class="col-md-3">
+							<h1 class="page-header" style="text-align: center;">注意</h1>
+							<div class="add-article-box-content">
+								<span class="prompt-text" style="color: lightcoral;">1：输入标题的时候需检查标题是否对应内容</span>
+								<br />
+								<span class="prompt-text" style="color: lightcoral;">2：输入内容的时候需要注意语言不要违规哦</span>
+								<br />
+								<span class="prompt-text" style="color: lightcoral;">3：图片不要违规哦</span>
+								<br />
+								<span class="prompt-text" style="color: lightcoral;">4：摘要需要能够概括文章哦</span>
+								<br />
+								<span class="prompt-text" style="color: lightcoral;">5：同一篇文章可以同时属于多个类别哦</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!--个人信息模态框-->
+		<div class="modal fade" id="seeUserInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<form action="" method="post">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<h4 class="modal-title">个人信息</h4>
+						</div>
+						<div class="modal-body">
+							<table class="table" style="margin-bottom:0px;">
+								<thead>
+									<tr> </tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td wdith="20%">姓名:</td>
+										<td width="80%"><input type="text" value="王雨" class="form-control" name="truename" maxlength="10" autocomplete="off" /></td>
+									</tr>
+									<tr>
+										<td wdith="20%">用户名:</td>
+										<td width="80%"><input type="text" value="admin" class="form-control" name="username" maxlength="10" autocomplete="off" /></td>
+									</tr>
+									<tr>
+										<td wdith="20%">电话:</td>
+										<td width="80%"><input type="text" value="18538078281" class="form-control" name="usertel" maxlength="13" autocomplete="off" /></td>
+									</tr>
+									<tr>
+										<td wdith="20%">旧密码:</td>
+										<td width="80%"><input type="password" class="form-control" name="old_password" maxlength="18" autocomplete="off" /></td>
+									</tr>
+									<tr>
+										<td wdith="20%">新密码:</td>
+										<td width="80%"><input type="password" class="form-control" name="password" maxlength="18" autocomplete="off" /></td>
+									</tr>
+									<tr>
+										<td wdith="20%">确认密码:</td>
+										<td width="80%"><input type="password" class="form-control" name="new_password" maxlength="18" autocomplete="off" /></td>
+									</tr>
+								</tbody>
+								<tfoot>
+									<tr></tr>
+								</tfoot>
+							</table>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+							<button type="submit" class="btn btn-primary">提交</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+		<!--个人登录记录模态框-->
+		<div class="modal fade" id="seeUserLoginlog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title">登录记录</h4>
+					</div>
+					<div class="modal-body">
+						<table class="table" style="margin-bottom:0px;">
+							<thead>
+								<tr>
+									<th>登录IP</th>
+									<th>登录时间</th>
+									<th>状态</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>::1:57081</td>
+									<td>2016-01-06 10:35:12</td>
+									<td>成功</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">朕已阅</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--微信二维码模态框-->
+		<div class="modal fade user-select" id="WeChat" tabindex="-1" role="dialog" aria-labelledby="WeChatModalLabel">
+			<div class="modal-dialog" role="document" style="margin-top:120px;max-width:280px;">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="WeChatModalLabel" style="cursor:default;">微信扫一扫</h4>
+					</div>
+					<div class="modal-body" style="text-align:center"> <img src="images/weixin.jpg" alt="" style="cursor:pointer" /> </div>
+				</div>
+			</div>
+		</div>
+		<script src="/static/admin/js/bootstrap.min.js"></script>
+		<script src="/static/admin/js/admin-scripts.js"></script>
+
+		<script>
+			$(function() {
+
+				//回显数据到富文本编辑器，这里得到的数据还是html代码，需要用下面的转码
+				$('.summernote').summernote('code', '[[${updateArticle.articleContent}]]');
+			});
+			//html转码
+			$(function(){
+				var a = $(".note-editable").text(); //news_abstract为p标签的class值
+				$(".note-editable").html(a);
+			});
+			function saveFile(files, editor, $editable) {
+			    //files是上传的图片集合，这里案例只是单张图片上传，网上教程一大推，此处代码省略
+			    alert("123");
+			    var formdata = new FormData();//存放上传的文件数据
+			    //此处 $('.note-image-input')[0].files[0]与方法传过来的参数files[0]应该等价，可以自己尝试是否等价
+			    formdata.append("file", $('.note-image-input')[0].files[0]);  
+			    $.ajax({  
+			        data : formdata,  
+			        type : "POST",  
+			        url : "/upload/img", //上传图片请求服务器地址，（请写你自己的请求地址）  
+			        cache : false,  
+			        contentType : false,  
+			        processData : false,  
+			        dataType : "json",  
+			        success: function(src) {
+			            //src是服务器上传文件响应数据，格式自定义，这里响应数据是文件上传后的可访问的路径 
+			            if(src!=null&&src!=""){
+			                //上传成功，处理逻辑
+			                //回显图片
+			                editor.insertImage($editable, src); 
+			            }else{
+			                //上传失败，处理逻辑
+			            }
+			        },  
+			        error:function(){  
+			            //上传出错，处理逻辑
+			        }  
+			    });  
+			}
+			//下面实现了图片的预览
+			function getfils() {
+				$('input[id=url1]').click();
+				$('input[id=url1]').change(function() {
+					$('#url2').val($(this).val());
+				});
+			}
+			$("#url1").change(function() {
+				var objUrl = getObjectURL(this.files[0]);
+				if(objUrl) {
+					$("#img").attr("src", objUrl);
+				}
+			});
+
+			function getObjectURL(file) {
+				var url = null;
+				if(window.createObjectURL != undefined) { // basic  
+					url = window.createObjectURL(file);
+				} else if(window.URL != undefined) { // mozilla(firefox)  
+					url = window.URL.createObjectURL(file);
+				} else if(window.webkitURL != undefined) { // webkit or chrome  
+					url = window.webkitURL.createObjectURL(file);
+				}
+				return url;
+			}
+		</script>
+	</body>
+
+</html>

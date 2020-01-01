@@ -1,0 +1,108 @@
+
+.container_me {
+    background: #fff;
+    padding: 60px 55px 0 55px;
+}
+
+img {
+    max-width: 100%
+}
+
+.propic {
+    border-radius: 10px;
+}
+
+hr {
+    margin: 20px 0;
+}
+.jindu{
+	width: 80%;
+	float: right;
+}
+.p_name{
+	width: 20%;
+	clear: both;
+	float: left;
+	height: 20px;
+	text-align: center;
+}
+.p_ablity{
+	width: 100%;
+	height: 20px;
+}
+.p_connect{
+	height: 30px;
+	line-height: 30px;
+	font-size: 20px;
+	width: 50%;
+	padding-left: 30px;
+	font-family: "楷体";
+	float: left;
+}
+.p_link img{
+	height: 92.3px;
+	width: 123px;
+}
+.dl-share .btn {
+    min-width: 120px;
+}
+
+.signature {
+    font-family: 'Kristi', cursive;
+    color: #3e3f40;
+    font-size: 2.2em;
+    margin-top: 20px;
+}
+
+.social {
+    margin-right: 7px;
+}
+
+.btn .fa {
+    margin-right: 10px;
+}
+
+.secicon.fa {
+    font-size: 28px;
+    color: #000;
+    margin-right: 10px;
+}
+
+.sub {
+    margin-bottom: 15px;
+}
+
+.award {
+    padding-top: 20px;
+}
+
+blockquote {
+    font-size: 1em;
+    padding: 0 15px;
+    margin: 30px 0;
+}
+.copyrights{
+	text-indent:-9999px;
+	height:0;
+	line-height:0;
+	font-size:0;
+	overflow:hidden;
+}
+.mainleft {
+    padding-right: 30px;
+}
+
+.testimonials img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    float: left;
+    margin-right: 15px;
+    margin-top: -10px;
+    border: 1px solid #ededed;
+}
+
+.year,
+.share {
+    text-align: right;
+}

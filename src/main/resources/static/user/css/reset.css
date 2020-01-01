@@ -1,0 +1,15 @@
+
+
+ul, ol {
+  list-style: none;
+}
+.item a {
+  color: #333;
+  text-decoration: none;
+}
+.a_block{
+	display: block;
+}
+img {
+  vertical-align: top;
+}

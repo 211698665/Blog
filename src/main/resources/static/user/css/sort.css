@@ -1,0 +1,174 @@
+
+
+
+/* ====== main ====== */
+.banner {
+  position: relative;
+  height: 445px;
+}
+
+/* ====== 内容列表 ====== */
+.main-cont__title {
+  position: relative;
+  height: 54px;
+  margin-top: 0px;
+  border-top: 3px solid #86b89f;
+}
+.main-cont__title h3 {
+  font-size: 18px;
+  line-height: 54px;
+}
+.main-cont__title .more {
+  position: absolute;
+  right: 0;
+  top: 28px;
+  width: 80px;
+  height: 28px;
+  line-height: 28px;
+  text-align: center;
+  color: #fff;
+  background-color: #22b4f6;
+  text-decoration: none;
+  font-size: 12px;
+}
+.main-cont__title .more:hover {
+  background-color: #1e9ed8;
+}
+.main-cont__list {
+  margin-right: -20px;
+}
+.main-cont__list .item {
+  position: relative;
+  top: 0;
+  float: left;
+  width: 224px;
+  margin-right: 24px;
+  margin-bottom: 20px;
+  border: 1px solid #dedfe0;
+  background-color: #fff;
+  box-sizing: border-box;
+
+  transition: top 0.2s;
+}
+.main-cont__list .item:hover {
+  top: -3px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .3);
+}
+/* main-album */
+.main-album .main-cont__list .item {
+  height: 328px;
+}
+.main-album .pic,
+.main-album .pic img {
+  width: 100%;
+  height: 224px;
+}
+.main-album .info {
+  padding-left: 12px;
+}
+.main-album .info .title {
+  margin: 15px 0 28px;
+  font-weight: 700;
+}
+.main-album .info p {
+  line-height: 18px;
+  color: #888;
+}
+.main-album .info .author {
+  display: inline;
+  color: #888;
+}
+/* main-recommend */
+.main-recommend .list {
+  position: absolute;
+  top: 37px;
+  right: 10px;
+  font-size: 0;
+}
+.main-recommend .list em,
+.main-recommend .list a,
+.main-recommend .list span {
+  display: inline-block;
+  font-size: 12px;
+}
+.main-recommend .list em {
+  color: #666;
+  margin-right: 6px;
+}
+.main-recommend .list span {
+  padding: 0 12px;
+  color: #ddd;
+}
+.main-recommend .item {
+  position: relative;
+  height: 298px;
+}
+.main-recommend .info {
+  padding-left: 12px;
+}
+.main-recommend .info .title {
+  line-height: 48px;
+  font-weight: 700;
+}
+.main-recommend .info span {
+  color: #888;
+}
+.main-recommend .info .purchase {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  width: 56px;
+  height: 25px;
+  line-height: 25px;
+  color: #fff;
+  background-color: #ffbb33;
+}
+/* main-user */
+.main-user .item {
+  position: relative;
+  height: 254px;
+  margin-top: 7px;
+}
+.main-user .pic {
+  width: 100%;
+  height: 112px;
+}
+.main-user .headImg {
+  position: absolute;
+  left: 50%;
+  top: 68px;
+  width: 90px;
+  height: 90px;
+  margin-left: -46px;
+  border-radius: 50%;
+  background-color: #fff;
+}
+.main-user .headImg img {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}
+.main-user .info {
+  margin-top: 54px;
+  text-align: center;
+}
+.main-user .info-title {
+  line-height: 32px;
+}
+.main-user p {
+  line-height: 20px;
+  color: #888;
+  font-size: 12px;
+}
+.main-user .icon-star {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin-right: 6px;
+  vertical-align: -2px;
+}
+.main-user b {}
+/* readMore */

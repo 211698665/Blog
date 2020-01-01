@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.henu.dao.UserMapper" >
+  <resultMap id="BaseResultMap" type="cn.henu.pojo.User" >
+    <id column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="online_time" property="onlineTime" jdbcType="VARCHAR" />
+    <result column="user_mail" property="userMail" jdbcType="VARCHAR" />
+    <result column="user_address" property="userAddress" jdbcType="VARCHAR" />
+    <result column="user_age" property="userAge" jdbcType="INTEGER" />
+    <result column="user_sex" property="userSex" jdbcType="INTEGER" />
+    <result column="user_qq" property="userQq" jdbcType="INTEGER" />
+    <result column="user_desc" property="userDesc" jdbcType="VARCHAR" />
+    <result column="user_updatetime" property="userUpdatetime" jdbcType="TIMESTAMP" />
+    <result column="user_createtime" property="userCreatetime" jdbcType="TIMESTAMP" />
+    <result column="user_image" property="userImage" jdbcType="VARCHAR" />
+    <result column="user_password" property="userPassword" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    user_id, user_name, online_time, user_mail, user_address, user_age, user_sex, user_qq,
+    user_desc, user_updatetime, user_createtime, user_image, user_password
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.henu.pojo.UserExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from user
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from user
+    where user_id = #{userId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.henu.pojo.UserExample" >
+    delete from user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.henu.pojo.User" >
+    insert into user (user_id, user_name, online_time,
+      user_mail, user_address, user_age,
+      user_sex, user_qq, user_desc,
+      user_updatetime, user_createtime, user_image,
+      user_password)
+    values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{onlineTime,jdbcType=VARCHAR},
+      #{userMail,jdbcType=VARCHAR}, #{userAddress,jdbcType=VARCHAR}, #{userAge,jdbcType=INTEGER},
+      #{userSex,jdbcType=INTEGER}, #{userQq,jdbcType=INTEGER}, #{userDesc,jdbcType=VARCHAR},
+      #{userUpdatetime,jdbcType=TIMESTAMP}, #{userCreatetime,jdbcType=TIMESTAMP}, #{userImage,jdbcType=VARCHAR},
+      #{userPassword,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.henu.pojo.User" >
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="onlineTime != null" >
+        online_time,
+      </if>
+      <if test="userMail != null" >
+        user_mail,
+      </if>
+      <if test="userAddress != null" >
+        user_address,
+      </if>
+      <if test="userAge != null" >
+        user_age,
+      </if>
+      <if test="userSex != null" >
+        user_sex,
+      </if>
+      <if test="userQq != null" >
+        user_qq,
+      </if>
+      <if test="userDesc != null" >
+        user_desc,
+      </if>
+      <if test="userUpdatetime != null" >
+        user_updatetime,
+      </if>
+      <if test="userCreatetime != null" >
+        user_createtime,
+      </if>
+      <if test="userImage != null" >
+        user_image,
+      </if>
+      <if test="userPassword != null" >
+        user_password,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="onlineTime != null" >
+        #{onlineTime,jdbcType=VARCHAR},
+      </if>
+      <if test="userMail != null" >
+        #{userMail,jdbcType=VARCHAR},
+      </if>
+      <if test="userAddress != null" >
+        #{userAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="userAge != null" >
+        #{userAge,jdbcType=INTEGER},
+      </if>
+      <if test="userSex != null" >
+        #{userSex,jdbcType=INTEGER},
+      </if>
+      <if test="userQq != null" >
+        #{userQq,jdbcType=INTEGER},
+      </if>
+      <if test="userDesc != null" >
+        #{userDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="userUpdatetime != null" >
+        #{userUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userCreatetime != null" >
+        #{userCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userImage != null" >
+        #{userImage,jdbcType=VARCHAR},
+      </if>
+      <if test="userPassword != null" >
+        #{userPassword,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.henu.pojo.UserExample" resultType="java.lang.Integer" >
+    select count(*) from user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update user
+    <set >
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.userName != null" >
+        user_name = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.onlineTime != null" >
+        online_time = #{record.onlineTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userMail != null" >
+        user_mail = #{record.userMail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userAddress != null" >
+        user_address = #{record.userAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userAge != null" >
+        user_age = #{record.userAge,jdbcType=INTEGER},
+      </if>
+      <if test="record.userSex != null" >
+        user_sex = #{record.userSex,jdbcType=INTEGER},
+      </if>
+      <if test="record.userQq != null" >
+        user_qq = #{record.userQq,jdbcType=INTEGER},
+      </if>
+      <if test="record.userDesc != null" >
+        user_desc = #{record.userDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userUpdatetime != null" >
+        user_updatetime = #{record.userUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.userCreatetime != null" >
+        user_createtime = #{record.userCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.userImage != null" >
+        user_image = #{record.userImage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userPassword != null" >
+        user_password = #{record.userPassword,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update user
+    set user_id = #{record.userId,jdbcType=INTEGER},
+    user_name = #{record.userName,jdbcType=VARCHAR},
+    online_time = #{record.onlineTime,jdbcType=VARCHAR},
+    user_mail = #{record.userMail,jdbcType=VARCHAR},
+    user_address = #{record.userAddress,jdbcType=VARCHAR},
+    user_age = #{record.userAge,jdbcType=INTEGER},
+    user_sex = #{record.userSex,jdbcType=INTEGER},
+    user_qq = #{record.userQq,jdbcType=INTEGER},
+    user_desc = #{record.userDesc,jdbcType=VARCHAR},
+    user_updatetime = #{record.userUpdatetime,jdbcType=TIMESTAMP},
+    user_createtime = #{record.userCreatetime,jdbcType=TIMESTAMP},
+    user_image = #{record.userImage,jdbcType=VARCHAR},
+    user_password = #{record.userPassword,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.henu.pojo.User" >
+    update user
+    <set >
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="onlineTime != null" >
+        online_time = #{onlineTime,jdbcType=VARCHAR},
+      </if>
+      <if test="userMail != null" >
+        user_mail = #{userMail,jdbcType=VARCHAR},
+      </if>
+      <if test="userAddress != null" >
+        user_address = #{userAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="userAge != null" >
+        user_age = #{userAge,jdbcType=INTEGER},
+      </if>
+      <if test="userSex != null" >
+        user_sex = #{userSex,jdbcType=INTEGER},
+      </if>
+      <if test="userQq != null" >
+        user_qq = #{userQq,jdbcType=INTEGER},
+      </if>
+      <if test="userDesc != null" >
+        user_desc = #{userDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="userUpdatetime != null" >
+        user_updatetime = #{userUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userCreatetime != null" >
+        user_createtime = #{userCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userImage != null" >
+        user_image = #{userImage,jdbcType=VARCHAR},
+      </if>
+      <if test="userPassword != null" >
+        user_password = #{userPassword,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.henu.pojo.User" >
+    update user
+    set user_name = #{userName,jdbcType=VARCHAR},
+      online_time = #{onlineTime,jdbcType=VARCHAR},
+      user_mail = #{userMail,jdbcType=VARCHAR},
+      user_address = #{userAddress,jdbcType=VARCHAR},
+      user_age = #{userAge,jdbcType=INTEGER},
+      user_sex = #{userSex,jdbcType=INTEGER},
+      user_qq = #{userQq,jdbcType=INTEGER},
+      user_desc = #{userDesc,jdbcType=VARCHAR},
+      user_updatetime = #{userUpdatetime,jdbcType=TIMESTAMP},
+      user_createtime = #{userCreatetime,jdbcType=TIMESTAMP},
+      user_image = #{userImage,jdbcType=VARCHAR},
+      user_password = #{userPassword,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByUserEmail" parameterType="String" resultMap="BaseResultMap">
+
+    select
+    <include refid="Base_Column_List" />
+    from user
+    where user_mail = #{userMail,jdbcType=VARCHAR}
+  </select>
+
+</mapper>

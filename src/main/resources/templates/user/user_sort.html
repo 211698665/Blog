@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta charset="UTF-8">
+		<title>syw的博客</title>
+		<link rel="apple-touch-icon-precomposed" href="/static/user/images/icon/icon.png">
+		<link rel="shortcut icon" href="/static/user/images/icon/favicon.ico">
+		<link rel="stylesheet" href="/static/user/css/main.css" />
+		<link rel="stylesheet" href="/static/user/css/reset.css" />
+		<link rel="stylesheet" href="/static/user/css/sort.css" />
+		<link rel="stylesheet" href="/static/user/css/baguetteBox.min.css" />
+		<link rel="stylesheet" type="text/css" href="/static/user/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="/static/user/css/nprogress.css">
+		<link rel="stylesheet" type="text/css" href="/static/user/css/font-awesome.min.css">
+		<link rel="stylesheet" type="text/css" href="/static/user/css/skPlayer.css">
+		<link rel="stylesheet" href="/static/user/css/cl-css.css" />
+		<link rel="stylesheet" type="text/css" href="/static/user/css/style.css">
+		<script src="/static/user/js/jquery-2.1.4.min.js"></script>
+		<script src="/static/user/js/nprogress.js"></script>
+		<script src="/static/user/js/jquery.lazyload.min.js"></script>
+		<script type="text/javascript" src="/static/user/js/skPlayer.min.js"></script>
+		<link rel="stylesheet" href="/static/user/css/main.css" />
+		<link rel="stylesheet" href="/static/user/css/sortImg.css" />
+	</head>
+	<body>
+		<header class="header" id="main_top">
+			<nav class="navbar navbar-default navbar-fixed-top" id="navbar" style="">
+				<div class="container">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#header-navbar" aria-expanded="false"> <span class="sr-only"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+						<h1 class="logo hvr-bounce-in"><a href="" title=""><img src="/static/user/images/logo.png" alt="" style="height: 80%;"></a></h1>
+					</div>
+					<div class="collapse navbar-collapse" id="header-navbar">
+						<ul class="nav navbar-nav navbar-right userMenu">
+							<li>
+								<a href="/user/index">博客首页</a>
+							</li>
+							<li class="hidden-index active">
+								<a href="/user/sort">博文分类</a>
+							</li>
+							<li>
+								<a href="/user/time">时光机器</a>
+							</li>
+							<li>
+								<a href="/user/photo">流年似水</a>
+							</li>
+							<li>
+								<a href="/user/me">关于博主</a>
+							</li>
+						</ul>
+
+					</div>
+				</div>
+			</nav>
+		</header>
+		<section class="container">
+			<div class="content-wrap">
+				<div class="content">
+					<div class="main-cont main-user" style="padding-left: 66px;padding-right: 30px;">
+						<div class="main-cont__title" style="width: 100%;text-align: center; ">
+							<h3 style="width: 100%;color:#5a5f5b;">博客分类</h3>
+						</div>
+						<ul class="main-cont__list clearfix">
+							<li class="item" th:each="category:${categorylist}">
+								<div class="row">
+									<div class="col-md-4 col-sm-6" style="width: 100%;height: 122px;overflow:hidden">
+										<div class="box">
+											<img th:src="@{${category.categoryImg}}" style="opacity: 0.6">
+											<div class="box-content">
+												<p class="description"  th:text="${category.categoryDesc}">
+
+												</p>
+											</div>
+										</div>
+									</div>
+								</div>
+								<a th:href="@{'/user/sortList?id='+${category.categoryId}}" class="headImg a_block" th:style="'text-align: center;line-height:94px ;color: white;margin-top: 16px;background-color:'+${category.Categorycolor}+''" >
+									<span th:text="${category.categoryName}"></span>
+								</a>
+								<div class="info">
+									<a class="info-title" th:href="@{'/user/sortList?id='+${category.categoryId}}" th:text="${category.categoryName}"></a>
+									<p>博客数目: <span th:text="${category.categoryPid}"></span>条</p>
+								</div>
+							</li>
+						</ul>
+						<ul class="pager" >
+							<li class="previous" th:switch = "${currPage - 1>0}">
+								<a style="color: #A0A49C" th:case="true" th:href="@{'/user/sort?pn='+${currPage - 1}}">&larr; 上一页</a>
+								<a style="color:#A0A49C;" th:case="false" href="/user/sort?pn=1">- 第一页 -</a>
+							</li>
+							<li class="next" th:switch = "${currPage <pageSize}" >
+								<a style="color:#A0A49C;" th:case="true" th:href="@{'/user/sort?pn='+${currPage + 1}}">下一页 &rarr;</a>
+								<a style="color:#A0A49C;" th:case="false" th:href="@{'/user/sort?pn='+${pageSize}}">- 末尾页 -</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<aside class="sidebar">
+				<div class="">
+					<div class="widget widget-tabs" style="text-align: center ;padding-left: 130px;padding-top: 30px;height: 328px;margin-top: -1px; border-top:1px solid lightgray;box-sizing: border-box;">
+						<div style="height: 100px; width: 100px;border-radius: 50px;overflow: hidden; ">
+							<img src="/static/user/images/userImg/306539.jpg" style="height: 100px; width: 100px;" />
+						</div>
+						<div style="margin-left: -130px;">
+							<br />
+							<p class="text-primary text-center" style="font-family: '楷体';font-size: 22px;color: #646869;">
+								<font style="color: red;">syw</font>的博客</p>
+							<p class="text-info text-center" style="margin-top: 6px;font-family: '楷体';font-size: 20px; color: #646869;">Email：syw1234@126.com</p>
+							<p class="text-info text-center" style="margin-top: 10px;">
+								<a href="#" style="text-decoration: none ;font-family: '楷体';font-size: 18px; color: #646869;"><b>访问次数</b>: &nbsp;<span class="bg-success" style="display: inline-block;height: 26px; width: 60px;border-radius:16px;color: #2FC72F;">50</span></a>
+							</p>
+							<p class="text-info text-center" style="margin-top: 10px;">
+								<a href="#" style="text-decoration: none;font-family: '楷体';font-size: 18px; color: #646869;"><b>博文总数</b>: &nbsp;<span class="bg-success" style="display: inline-block;height: 26px; width: 60px;border-radius: 16px;color: #2FC72F;">20</span></a>
+							</p>
+						</div>
+					</div>
+					<div class="widget widget_search" style="box-sizing: border-box;">
+						<form class="navbar-form" action="/user/searchList" method="post">
+							<div class="input-group">
+								<input type="text" name="keyword" class="form-control" size="35" placeholder="请输入关键字" th:value="${keyword !=null }?${keyword}:''" maxlength="15" autocomplete="off">
+								<span class="input-group-btn">
+					            <button class="btn btn-default btn-search" name="search" type="submit">搜索</button>
+					            </span> 
+							</div>
+						</form>
+					</div>
+				</div>
+				<div class="widget widget_medio" style="width: 360px; height: 245px;box-sizing: border-box;">
+					<h3>
+			    		<a href="#" style="color: limegreen;">
+				          <span class="glyphicon glyphicon-music"></span>
+				        </a>
+				        &nbsp;&nbsp;动听音乐
+			    	</h3>
+					<div id="skPlayer" style=""></div>
+				</div>
+				<div class="widget widget_sentence" style="box-sizing: border-box;">
+					<h3>
+				      	<a href="#" style="color: mediumpurple;">
+				          <span class="glyphicon glyphicon-th"></span>
+				        </a>
+				        &nbsp;&nbsp;博客分类
+				      </h3>
+					<div class="widget-sentence-content" style="padding-bottom: 0px;">
+						<table class="table " style="font-size: 16px;">
+							<tr >
+								<td th:each="categorylist,listStat:${categorysList}" th:if="${listStat.index / 4 eq 0}">
+									<span th:class="${categorylist.categoryDesc}" th:text="${categorylist.categoryName}"></span>
+								</td>
+							</tr>
+							<tr >
+								<td th:each="categorylist,listStat:${categorysList}" th:if="${listStat.index / 4 eq 1}">
+									<span th:class="${categorylist.categoryDesc}" th:text="${categorylist.categoryName}"></span>
+								</td>
+							</tr>
+							<tr >
+								<td th:each="categorylist,listStat:${categorysList}" th:if="${listStat.index / 4 eq 2}">
+									<span th:class="${categorylist.categoryDesc}" th:text="${categorylist.categoryName}"></span>
+								</td>
+							</tr>
+							<tr >
+								<td th:each="categorylist,listStat:${categorysList}" th:if="${listStat.index / 4 eq 3}">
+									<span th:class="${categorylist.categoryDesc}" th:text="${categorylist.categoryName}"></span>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+				<div class="widget widget_hot" style="box-sizing: border-box;">
+					<h3>
+			        	<a href="#" style="color: red;">
+			                <span class="glyphicon glyphicon-fire"></span>
+			            </a>
+			        	&nbsp;&nbsp;热门文章
+			        </h3>
+					<ul>
+						<li th:each="topArticle:${topListHot}">
+							<a th:href="@{'/user/artdetail?id='+${topArticle.articleId}}">
+								<span class="thumbnail" style="display: inline-block; width: 70px; height: 70px;">
+				        			<img class="thumb"  th:src="@{${topArticle.articleImage}}" style="width: 100%; height: 100%;" alt="">
+				        		</span>
+								<span style="display: inline-block;height: 2px;padding: 0px;margin: 0px;"></span>
+								<span class="text" style="font-size: 15px; margin-left: -45px; margin-top: -10px;" th:text="${topArticle !=null }?${topArticle.articleTitle }:''"></span>
+								<div style="height: 11px;padding: 0px;margin: 0px;"></div>
+								<span class="muted" style="margin-left: -45px;">
+				        			<i class="glyphicon glyphicon-time"></i> <span th:text="${topArticle !=null }?${topArticle.articleUpdatetime }:''"></span>
+				        		</span>
+								<span class="muted" style="margin-left: 10px;">
+				        			<i class="glyphicon glyphicon-eye-open"></i> <span th:text="${topArticle !=null }?${topArticle.articleClick }:''"></span>
+				        		</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</aside>
+		</section>
+		<footer class="footer">
+			<div class="container">
+				<p>&copy;C
+					<font style="text-transform:lowercase;">opyright</font> &nbsp;河南大学 2016级软件工程 &nbsp; syw的个人博客 &nbsp; &nbsp; 欢迎访问</p>
+			</div>
+			<div id="gotop">
+				<a href="#main_top" class="gotop back-to-top"></a>
+			</div>
+		</footer>
+		<script src="/static/user/js/bootstrap.min.js"></script>
+		<script>
+			var player = new skPlayer({
+				autoplay: false,
+				listshow: true,
+				/*music: {
+				    type: 'cloud',
+				    source: 71384707
+				}*/
+				music: {
+					type: 'file',
+					source: [{
+							name: '飞云之下',
+							author: '林俊杰&韩红',
+							src: '/static/user/music/飞云之下.mp3',
+							cover: '/static/user/images/musicImg/1.jpg'
+						},
+						{
+							name: '我的一个道姑朋友',
+							author: '以冬',
+							src: '/static/user/music/我的一个道姑朋友.mp3',
+							cover: '/static/user/images/musicImg/2.jpg'
+						}
+					]
+				}
+			});
+		</script>
+
+	</body>
+
+</html>
