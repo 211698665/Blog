@@ -13,5 +13,4 @@ public class HenuApplication {
     public static void main(String[] args) {
         SpringApplication.run(HenuApplication.class, args);
     }
-
 }
